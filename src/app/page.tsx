@@ -1,5 +1,9 @@
-export default function Home() {
+import React from 'react'
+
+const page = () => {
   return (
-    <div className="bg-primary text-secondary p-6 rounded-lg">This is a primary-colored box!</div>
-  );
+    <div>Hello </div>
+  )
 }
+
+export default page
