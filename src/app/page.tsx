@@ -2,7 +2,10 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>Hello </div>
+    <div className="w-full break-normal overflow-wrap">
+
+      Helloasjshakjshaskjahsjkahskjashajkshajkshakjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhwuiqouwqoiwuqoi=====wuqiowulllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+    </div>
   )
 }
 

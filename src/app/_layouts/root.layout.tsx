@@ -1,4 +1,5 @@
-// app/_layouts/root.layout.tsx
+
+"use client";
 import React, { type ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -15,6 +16,7 @@ import { ThemeProvider } from "@/shadcn/components/theme-provider";
 // Error Handling & Network Monitoring
 import ErrorBoundary from "@/app/_lib/error-boundary";
 import NetworkAlert from "@/app/_lib/network-alert";
+import { useIsMobile } from "@/shadcn/hooks/use-mobile";
 
 // Font Configurations
 const geistSans = Geist({
@@ -34,33 +36,37 @@ interface RootLayoutProps {
 }
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
-  return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
-      <body className="antialiased">
-        {/* Error Boundary should wrap all app logic */}
-        <ErrorBoundary>
-          {/* Network Alert should be top-level to detect connectivity changes */}
-          <NetworkAlert />
+  const isMobile = useIsMobile();
 
-          {/* Theme & State Management */}
+  return (
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="antialiased">
+        <ErrorBoundary>
+          <NetworkAlert />
           <ThemeProvider>
             <Toaster />
             <SidebarProvider>
-              {/* Main Layout Wrapper */}
-              <div className="flex h-screen w-full">
-                {/* Persistent Sidebar (App Navigation) */}
+              <div className="flex h-screen w-full overflow-hidden">
                 <AppSidebar />
-
-                {/* Chat Sidebar (Optional) */}
                 <ChatSidebar />
 
                 {/* Main Content Area */}
-                <SidebarInset className="flex flex-col w-full">  
-                  {/* App Header / Navbar */}
+                <SidebarInset className="flex flex-1 flex-col">
                   <Navbar />
 
-                  {/* Page Content */}
-                  <main className="flex-1 mt-8  overflow-y-auto p-4">{children}</main>
+                  {/* Scrollable Content Container */}
+                  <main className={`flex-1 mt-12 max-w-full overflow-auto bg-red-700 p-10  ${isMobile ? 'ml-0' : 'ml-14'}`}>
+                    <div className={`max-w-5xl w-full`}>
+                      {children}
+                    </div>
+                    {/* <div className="mx-auto max-w-5xl w-full">
+                      {children}
+                    </div> */}
+                  </main>
                 </SidebarInset>
               </div>
             </SidebarProvider>

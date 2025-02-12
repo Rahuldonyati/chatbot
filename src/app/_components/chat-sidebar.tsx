@@ -4,13 +4,11 @@ import * as React from "react"
 import {
   AudioWaveform,
   Bot,
-  ChevronsUpDown,
   Command,
   GalleryVerticalEnd,
   ChartBarStacked,
   SquareTerminal,
   BookMinus,
-  MessageSquare,
   MessagesSquare,
 } from "lucide-react"
 
@@ -54,7 +52,6 @@ import {
   DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu"
 import { Button } from "@/shadcn/components/ui/button"
-import { Separator } from "@radix-ui/react-separator"
 
 
 // This is sample data.
@@ -151,7 +148,7 @@ export function ChatSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) 
   const { theme } = useTheme();
   const { isMobile } = useSidebar()
   return (
-    <Sidebar collapsible="offcanvas" {...props} className="left-14 border border-purplelight">
+    <Sidebar collapsible="offcanvas" {...props} className="left-14 border  border-purplelight">
       <SidebarHeader className="flex justify-center items-center gap-0 ">
         <SidebarMenuButton
           size="lg"
@@ -178,7 +175,7 @@ export function ChatSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) 
 
         </Button>
       </SidebarHeader>
-      <SidebarContent className="border shadow-xl  m-2 rounded-sm overflow-y-auto scrollbar-thin  scrollbar-track-transparent scrollbar-thumb-rounded-lg scrollbar-thumb-opacity-70 scrollbar-track-opacity-20 transition-all">
+      <SidebarContent className=" m-2 rounded-sm overflow-y-auto scrollbar-thin  scrollbar-track-transparent scrollbar-thumb-rounded-lg scrollbar-thumb-opacity-70 scrollbar-track-opacity-20 transition-all">
         <SidebarGroup>
           <SidebarGroupLabel>Yesterday</SidebarGroupLabel>
           <SidebarMenu>
