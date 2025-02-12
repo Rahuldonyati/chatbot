@@ -7,7 +7,7 @@ import Link from "next/link";
 import { SidebarTrigger } from "@/shadcn/components/ui/sidebar";
 import { useSidebar } from "@/shadcn/components/ui/sidebar";
 import { useIsMobile } from "@/shadcn/hooks/use-mobile";
-import { Title } from "@/app/_constants/constants";
+import { TITLE } from "@/app/_constants/constants";
 
 export default function Navbar() {
     const { open } = useSidebar();
@@ -23,7 +23,7 @@ export default function Navbar() {
                 <div className="flex items-center space-x-4">
                     <SidebarTrigger />
                     <Link href="/" className="text-md font-bold text-secondary-foreground dark:text-secondary">
-                        {Title}
+                        {TITLE}
                     </Link>
                 </div>
 

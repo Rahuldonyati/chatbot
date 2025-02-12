@@ -10,13 +10,9 @@ import Navbar from "@/app/_components/app-header";
 
 // UI & Providers
 import { SidebarInset, SidebarProvider } from "@/shadcn/components/ui/sidebar";
-import { Toaster } from "@/shadcn/components/ui/toaster";
-import { ThemeProvider } from "@/shadcn/components/theme-provider";
-
-// Error Handling & Network Monitoring
-import ErrorBoundary from "@/app/_lib/error-boundary";
-import NetworkAlert from "@/app/_lib/network-alert";
 import { useIsMobile } from "@/shadcn/hooks/use-mobile";
+
+import RootContext from "@/app/_contexts/root-context";
 
 // Font Configurations
 const geistSans = Geist({
@@ -45,33 +41,21 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
       suppressHydrationWarning
     >
       <body className="antialiased">
-        <ErrorBoundary>
-          <NetworkAlert />
-          <ThemeProvider>
-            <Toaster />
-            <SidebarProvider>
-              <div className="flex h-screen w-full overflow-hidden">
-                <AppSidebar />
-                <ChatSidebar />
+        <RootContext>
+          <SidebarProvider>
+            <div className="flex overflow-hidden w-full h-screen">
+              <AppSidebar />
+              <ChatSidebar />
+              <SidebarInset >
+                <Navbar />
+                <main className={` mt-11 overflow-y-scroll overflow-x-hidden ${isMobile ? 'ml-0' : 'ml-14'}`}>
+                  {children}
+                </main>
+              </SidebarInset>
+            </div>
+          </SidebarProvider>
+        </RootContext>
 
-                {/* Main Content Area */}
-                <SidebarInset className="flex flex-1 flex-col">
-                  <Navbar />
-
-                  {/* Scrollable Content Container */}
-                  <main className={`flex-1 mt-12 max-w-full overflow-auto bg-red-700 p-10  ${isMobile ? 'ml-0' : 'ml-14'}`}>
-                    <div className={`max-w-5xl w-full`}>
-                      {children}
-                    </div>
-                    {/* <div className="mx-auto max-w-5xl w-full">
-                      {children}
-                    </div> */}
-                  </main>
-                </SidebarInset>
-              </div>
-            </SidebarProvider>
-          </ThemeProvider>
-        </ErrorBoundary>
       </body>
     </html>
   );
