@@ -1,7 +1,8 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
-import RootLayout from './_layouts/root.layout'; // Fixed casing
+import RootLayout from '@/app/_layouts/root-layout'; // Fixed casing
+import RootContext from './_contexts/root-context';
 
 export const metadata: Metadata = {
   title: 'DoAssist',
@@ -13,5 +14,9 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <RootLayout>{children}</RootLayout>;
+  return (
+
+    <RootContext>
+      <RootLayout>{children}</RootLayout>
+    </RootContext>);
 }

@@ -1,5 +1,7 @@
 "use client";
 
+import { useCallback } from "react";
+import { signOut } from "next-auth/react";
 import { Button } from "@/shadcn/components/ui/button";
 import ModeToggle from "./toggle-theme";
 import { Bell, LogOut } from "lucide-react";
@@ -8,21 +10,34 @@ import { SidebarTrigger } from "@/shadcn/components/ui/sidebar";
 import { useSidebar } from "@/shadcn/components/ui/sidebar";
 import { useIsMobile } from "@/shadcn/hooks/use-mobile";
 import { TITLE } from "@/app/_constants/constants";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shadcn/components/ui/tooltip";
 
-export default function Navbar() {
+export default function Header() {
     const { open } = useSidebar();
     const isMobile = useIsMobile();
+
+
+    const handleNotificationClick = useCallback(() => {
+        console.log("Notification clicked");
+    }, []);
+
+    const handleLogoutClick = useCallback(() => {
+        signOut();
+    }, []);
 
     return (
         <nav
             className={`fixed top-0 right-0 z-50 bg-background dark:bg-primary shadow-md dark:shadow-[0_4px_6px_rgba(255,255,255,0.2)] transition-all duration-300
-                ${isMobile ? "left-0" : open ? "left-[15.5rem]" : "left-[3.5rem]"}`}
+        ${isMobile ? "left-0" : open ? "left-[15.5rem]" : "left-[3.5rem]"}`}
         >
             <div className="flex items-center justify-between px-2 py-1 w-full">
                 {/* Left Section: Sidebar Toggle & Logo */}
                 <div className="flex items-center space-x-4">
                     <SidebarTrigger />
-                    <Link href="/" className="text-md font-bold text-secondary-foreground dark:text-secondary">
+                    <Link
+                        href="/"
+                        className="text-md font-bold text-secondary-foreground dark:text-secondary"
+                    >
                         {TITLE}
                     </Link>
                 </div>
@@ -30,11 +45,21 @@ export default function Navbar() {
                 {/* Right Section: Notifications, Theme Toggle, Logout */}
                 <div className="flex items-center space-x-4">
                     <ModeToggle />
-                    {[Bell, LogOut].map((Icon, index) => (
-                        <Button key={index} variant="outline" size="icon">
-                            <Icon className="h-6 w-6 text-primary dark:text-primary-foreground" />
-                        </Button>
-                    ))}
+
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant="outline" size="icon" onClick={handleNotificationClick}>
+                                <Bell className="h-6 w-6 text-primary dark:text-primary-foreground" />
+                            </Button>
+                        </TooltipTrigger><TooltipContent side="bottom">Notification</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant="outline" size="icon" onClick={handleLogoutClick}>
+                                <LogOut className="h-6 w-6 text-primary dark:text-primary-foreground" />
+                            </Button>
+                        </TooltipTrigger><TooltipContent side="bottom">Logout</TooltipContent>
+                    </Tooltip>
                 </div>
             </div>
         </nav>

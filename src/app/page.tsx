@@ -1,19 +1,31 @@
+"use client";
 import React from "react";
 import { Button } from "@/shadcn/components/ui/button";
 import { Card, CardContent } from "@/shadcn/components/ui/card";
 import { Input } from "@/shadcn/components/ui/input";
 import { Mail } from "lucide-react";
+import Loader from "./_components/page-loader";
+
 
 const HomePage = () => {
+  const [loading, setLoading] = React.useState(false);
+
+  const load = () => {
+    setLoading(true);
+  }
+
+
   return (
+
     <div className="w-full min-h-screen flex flex-col bg-white  text-black dark:bg-black dark:text-white">
-   
+      {loading &&
+        <Loader />}
 
       {/* Landing Section */}
       <section className="flex flex-col items-center justify-center text-center py-20 px-6">
         <h2 className="text-4xl font-bold">Welcome to MyApp</h2>
         <p className="mt-4 text-lg">Your one-stop solution for everything.</p>
-        <Button className="mt-6">Explore Now</Button>
+        <Button className="mt-6" onClick={load}>Explore Now</Button>
       </section>
 
       {/* Content Section */}
