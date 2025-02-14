@@ -1,10 +1,9 @@
-// lib/auth.ts
-import { NextAuthOptions, Account, Profile } from 'next-auth';
+import { NextAuthOptions, Account, Profile, Session } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 import { azureProvider } from '@/app/(routes)/api/auth/azure';
 
 export const authOptions: NextAuthOptions = {
   providers: [azureProvider],
-  // debug: process.env.NODE_ENV === 'development',
   session: {
     strategy: 'jwt',
     maxAge: 60 * 60 * 1, // 1 hour
@@ -19,7 +18,7 @@ export const authOptions: NextAuthOptions = {
       account,
       profile,
     }: {
-      token: any;
+      token: JWT;
       account?: Account | null;
       profile?: Profile | null;
     }) {
@@ -30,13 +29,13 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
 
-    async session({ session, token }: { session: any; token: any }) {
-      console.log('session', session);
+    async session({ session, token }: { session: Session; token: JWT }) {
+
       session.user = {
         ...session.user, // default properties (if any)
-        ...token.user, // this includes image and any other fields you set in the jwt callback
+        ...(token.user as Session['user']), // Ensure type safety
       };
-      session.accessToken = token.accessToken;
+      session.accessToken = token.accessToken as string;
       return session;
     },
   },

@@ -17,7 +17,7 @@ const HomePage = () => {
 
   return (
 
-    <div className="w-full min-h-screen flex flex-col bg-white  text-black dark:bg-black dark:text-white">
+    <div className="w-full min-h-screen flex flex-col bg-white  text-black dark:bg-gray-900 dark:text-white">
       {loading &&
         <Loader />}
 

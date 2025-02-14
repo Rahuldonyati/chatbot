@@ -29,6 +29,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu";
+import { signOut } from "next-auth/react";
 
 /** --------- Type Definitions --------- */
 interface NavItemConfig {
@@ -212,7 +213,7 @@ const UserMenu: React.FC = () => {
       <DropdownMenuSeparator /> */}
 
 
-      <DropdownMenuItem className="cursor-pointer" onClick={() => console.log("Log out clicked")}>
+      <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
         <LogOut className="mr-2 h-4 w-4" />
         Log out
       </DropdownMenuItem>

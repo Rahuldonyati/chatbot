@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "@/shadcn/hooks/use-toast"; // Directly import toast function
 
 const NetworkAlert = () => {
-    const [isOffline, setIsOffline] = useState(!navigator.onLine);
 
     useEffect(() => {
         const handleOnline = () => {
-            setIsOffline(false);
             toast({
                 title: "🌐 Back Online",
                 description: "Your internet connection is restored.",
@@ -16,7 +14,6 @@ const NetworkAlert = () => {
         };
 
         const handleOffline = () => {
-            setIsOffline(true);
             toast({
                 title: "⚠️ No Internet",
                 description: "You are offline. Some features may not work.",

@@ -27,7 +27,7 @@ export default function Header() {
 
     return (
         <nav
-            className={`fixed top-0 right-0 z-50 bg-background dark:bg-primary shadow-md dark:shadow-[0_4px_6px_rgba(255,255,255,0.2)] transition-all duration-300
+            className={`fixed top-0 right-0 z-50 bg-background dark:bg-background shadow-md  transition-all duration-300
         ${isMobile ? "left-0" : open ? "left-[15.5rem]" : "left-[3.5rem]"}`}
         >
             <div className="flex items-center justify-between px-2 py-1 w-full">
