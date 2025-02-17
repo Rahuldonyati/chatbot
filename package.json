@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "build:prod": "npm install && npm run build && npm run install:clean",
+    "build:prod": "npm install && npm run build && npm run install:clean",// for testing
     "start": "next start",
     "lint": "next lint"
   },
